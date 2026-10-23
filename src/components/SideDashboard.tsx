@@ -24,8 +24,11 @@ import {
   ChevronRight,
   ShieldCheck,
   Send,
-  Truck
+  Truck,
+  Instagram
 } from 'lucide-react';
+import { CakeElegancyLogo } from './Logo';
+import { SOCIAL_LINKS, CONTACT_INFO } from '../data/social';
 
 interface SideDashboardProps {
   isOpen: boolean;
@@ -89,20 +92,8 @@ export function SideDashboard({ isOpen, onClose }: SideDashboardProps) {
       <div className="fixed inset-y-0 left-0 max-w-sm w-full flex">
         <div className="w-full bg-white dark:bg-[#1A0B2E] text-purple-950 dark:text-purple-100 shadow-2xl flex flex-col border-r border-pink-100 dark:border-purple-800/60 animate-in slide-in-from-left duration-300">
           {/* Drawer Header */}
-          <div className="p-5 border-b border-purple-100 dark:border-purple-800/60 flex items-center justify-between bg-purple-50/60 dark:bg-purple-950/40">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-800 via-purple-700 to-pink-500 flex items-center justify-center text-white shadow-md">
-                <Cake className="w-5 h-5" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-serif text-lg font-bold text-purple-950 dark:text-white leading-none">
-                  Cake Elegancy
-                </span>
-                <span className="text-[11px] text-pink-600 dark:text-pink-400 font-serif italic mt-0.5">
-                  Hellen's cakery paradise
-                </span>
-              </div>
-            </div>
+          <div className="p-4 border-b border-purple-100 dark:border-purple-800/60 flex items-center justify-between bg-purple-50/60 dark:bg-purple-950/40">
+            <CakeElegancyLogo variant="inline" size="sm" interactive={false} />
 
             <div className="flex items-center gap-1">
               {/* Quick Dark Mode toggle in drawer */}
@@ -336,32 +327,48 @@ export function SideDashboard({ isOpen, onClose }: SideDashboardProps) {
               </p>
               <div className="flex gap-2">
                 <a
-                  href="https://wa.me/260971603384"
+                  href={SOCIAL_LINKS.whatsapp.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 p-2 rounded-xl bg-emerald-600/10 dark:bg-emerald-950/40 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-[11px] font-bold flex items-center justify-center gap-1 hover:bg-emerald-600 hover:text-white transition-all"
-                  title="WhatsApp"
+                  title="Chat with Hellen on WhatsApp"
                 >
                   <MessageCircle className="w-3.5 h-3.5" />
                   <span>WhatsApp</span>
                 </a>
                 <a
-                  href="#"
-                  className="flex-1 p-2 rounded-xl bg-pink-600/10 dark:bg-pink-950/40 border border-pink-500/30 text-pink-700 dark:text-pink-300 text-[11px] font-bold flex items-center justify-center hover:bg-pink-600 hover:text-white transition-all"
+                  href={SOCIAL_LINKS.instagram.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 p-2 rounded-xl bg-gradient-to-r from-purple-600/15 to-pink-600/15 dark:bg-pink-950/40 border border-pink-500/40 text-pink-700 dark:text-pink-300 text-[11px] font-bold flex items-center justify-center gap-1 hover:from-purple-600 hover:to-pink-600 hover:text-white transition-all shadow-2xs"
+                  title="Follow CAKE ELEGANCE on Instagram (@cake_elegancee)"
                 >
-                  Instagram
+                  <Instagram className="w-3.5 h-3.5" />
+                  <span>Instagram</span>
                 </a>
                 <a
-                  href="#"
-                  className="flex-1 p-2 rounded-xl bg-blue-600/10 dark:bg-blue-950/40 border border-blue-500/30 text-blue-700 dark:text-blue-300 text-[11px] font-bold flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"
+                  href={SOCIAL_LINKS.facebook.url}
+                  className="p-2 rounded-xl bg-blue-600/10 dark:bg-blue-950/40 border border-blue-500/30 text-blue-700 dark:text-blue-300 text-[11px] font-bold flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"
+                  title="Facebook (Coming Soon)"
                 >
                   Facebook
                 </a>
                 <a
-                  href="#"
+                  href={SOCIAL_LINKS.tiktok.url}
                   className="p-2 rounded-xl bg-purple-600/10 dark:bg-purple-950/40 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-[11px] font-bold flex items-center justify-center hover:bg-purple-700 hover:text-white transition-all"
+                  title="TikTok (Coming Soon)"
                 >
                   TikTok
+                </a>
+              </div>
+              <div className="mt-1 text-center">
+                <a
+                  href={SOCIAL_LINKS.instagram.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block text-[10px] text-pink-600 dark:text-pink-400 font-semibold hover:underline"
+                >
+                  CAKE ELEGANCE • @cake_elegancee →
                 </a>
               </div>
             </div>

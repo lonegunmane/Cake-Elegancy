@@ -15,8 +15,11 @@ import {
   Truck,
   Percent,
   Package,
-  Star
+  Star,
+  Instagram
 } from 'lucide-react';
+import { CakeElegancyIcon } from '../components/Logo';
+import { SOCIAL_LINKS, CONTACT_INFO } from '../data/social';
 
 interface HomePageProps {
   onQuickView: (product: Product) => void;
@@ -360,15 +363,43 @@ export function HomePage({ onQuickView }: HomePageProps) {
                 </span>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <span className="text-purple-300">Socials:</span>
-                <a href="https://wa.me/260971603384" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline font-semibold">WhatsApp</a>
+                <a
+                  href={SOCIAL_LINKS.whatsapp.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-emerald-400 hover:underline font-semibold"
+                >
+                  WhatsApp
+                </a>
                 <span>•</span>
-                <a href="#" className="hover:text-pink-300 transition-colors">Instagram</a>
+                <a
+                  href={SOCIAL_LINKS.instagram.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-pink-300 hover:text-white transition-colors font-semibold flex items-center gap-1"
+                  title="Follow CAKE ELEGANCE on Instagram (@cake_elegancee)"
+                >
+                  <Instagram className="w-3.5 h-3.5" />
+                  <span>Instagram (@cake_elegancee)</span>
+                </a>
                 <span>•</span>
-                <a href="#" className="hover:text-pink-300 transition-colors">Facebook</a>
+                <a
+                  href={SOCIAL_LINKS.facebook.url}
+                  className="hover:text-pink-300 text-purple-300 transition-colors"
+                  title="Facebook (Coming Soon)"
+                >
+                  Facebook
+                </a>
                 <span>•</span>
-                <a href="#" className="hover:text-pink-300 transition-colors">TikTok</a>
+                <a
+                  href={SOCIAL_LINKS.tiktok.url}
+                  className="hover:text-pink-300 text-purple-300 transition-colors"
+                  title="TikTok (Coming Soon)"
+                >
+                  TikTok
+                </a>
               </div>
             </div>
           </div>

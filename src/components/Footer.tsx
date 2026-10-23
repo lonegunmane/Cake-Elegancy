@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from '../context/RouterContext';
-import { Cake, Heart, Sparkles, Phone, MessageCircle, Mail, Check, Truck, Globe } from 'lucide-react';
+import { Cake, Heart, Sparkles, Phone, MessageCircle, Mail, Check, Truck, Globe, Instagram } from 'lucide-react';
 import { CATEGORIES } from '../data/products';
+import { CakeElegancyLogo } from './Logo';
+import { SOCIAL_LINKS, CONTACT_INFO } from '../data/social';
 
 export function Footer() {
   const [email, setEmail] = useState('');
@@ -21,18 +23,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-purple-800/60">
           {/* Column 1: Brand & Order-Only Note */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center text-white shadow-md">
-                <Cake className="w-5 h-5" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-serif text-2xl font-bold tracking-tight text-white leading-none">
-                  Cake Elegancy
-                </span>
-                <span className="text-xs text-pink-300 font-serif italic mt-0.5">
-                  Hellen's cakery paradise
-                </span>
-              </div>
+            {/* Brand Logo with Monogram CE Tiered Cake */}
+            <div className="space-y-1">
+              <CakeElegancyLogo variant="inline" size="lg" interactive={false} />
             </div>
             <p className="text-purple-200/80 text-sm leading-relaxed max-w-sm">
               Bespoke celebration cakes, golden buttery scones, wholesome breakfast muffins, and delicate swirl cupcakes. Handcrafted fresh to order using premium European cultured butter and gourmet flavors.
@@ -122,29 +115,36 @@ export function Footer() {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <a
-                    href="https://wa.me/260971603384"
+                    href={SOCIAL_LINKS.whatsapp.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-600/30 border border-emerald-500/40 text-emerald-300 text-xs hover:bg-emerald-600/50 transition-colors"
+                    title="Order or inquire directly on WhatsApp"
                   >
                     <MessageCircle className="w-3.5 h-3.5" />
                     <span>WhatsApp</span>
                   </a>
                   <a
-                    href="#"
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-pink-600/30 border border-pink-500/40 text-pink-300 text-xs hover:bg-pink-600/50 transition-colors"
+                    href={SOCIAL_LINKS.instagram.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-purple-600/40 to-pink-600/40 border border-pink-500/50 text-pink-300 text-xs hover:from-purple-600/60 hover:to-pink-600/60 hover:text-white transition-all shadow-xs"
+                    title="Follow CAKE ELEGANCE on Instagram (@cake_elegancee)"
                   >
-                    <span>Instagram</span>
+                    <Instagram className="w-3.5 h-3.5" />
+                    <span>Instagram (@cake_elegancee)</span>
                   </a>
                   <a
-                    href="#"
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-blue-600/30 border border-blue-500/40 text-blue-300 text-xs hover:bg-blue-600/50 transition-colors"
+                    href={SOCIAL_LINKS.facebook.url}
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-blue-600/20 border border-blue-500/30 text-blue-300/80 text-xs hover:bg-blue-600/40 transition-colors"
+                    title="Facebook page coming soon"
                   >
                     <span>Facebook</span>
                   </a>
                   <a
-                    href="#"
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-purple-600/30 border border-purple-500/40 text-purple-300 text-xs hover:bg-purple-600/50 transition-colors"
+                    href={SOCIAL_LINKS.tiktok.url}
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-purple-600/20 border border-purple-500/30 text-purple-300/80 text-xs hover:bg-purple-600/40 transition-colors"
+                    title="TikTok profile coming soon"
                   >
                     <span>TikTok</span>
                   </a>

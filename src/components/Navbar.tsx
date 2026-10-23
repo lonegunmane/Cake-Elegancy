@@ -19,6 +19,8 @@ import {
   Sparkles
 } from 'lucide-react';
 import { CATEGORIES } from '../data/products';
+import { CakeElegancyLogo } from './Logo';
+import { CONTACT_INFO } from '../data/social';
 
 interface NavbarProps {
   onOpenSideDashboard: () => void;
@@ -69,26 +71,15 @@ export function Navbar({ onOpenSideDashboard }: NavbarProps) {
               </button>
             </div>
 
-            {/* Cake Elegancy Brand Logo — Clicking opens the Side Dashboard! */}
+            {/* Cake Elegancy Brand Logo with Monogram CE Tiered Cake — Clicking opens the Side Dashboard! */}
             <button
               type="button"
               onClick={onOpenSideDashboard}
-              className="flex items-center gap-2.5 group text-left focus:outline-none focus:ring-2 focus:ring-pink-500/50 rounded-2xl p-1 -ml-1 transition-all"
+              className="flex items-center group text-left focus:outline-none focus:ring-2 focus:ring-pink-500/50 rounded-2xl p-1 -ml-1 transition-all"
               title="Click logo to open Cake Elegancy Dashboard & Menu"
               aria-label="Open Cake Elegancy Side Dashboard"
             >
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-800 via-purple-700 to-pink-500 flex items-center justify-center shadow-md shadow-purple-500/20 group-hover:scale-105 group-hover:shadow-pink-500/30 transition-all duration-300 shrink-0">
-                <Cake className="w-6 h-6 text-white" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-purple-950 dark:text-white flex items-center leading-none">
-                  Cake Elegancy
-                  <span className="w-2 h-2 rounded-full bg-pink-500 ml-1.5 inline-block group-hover:animate-ping"></span>
-                </span>
-                <span className="text-[10px] sm:text-[11px] font-medium tracking-normal text-pink-600 dark:text-pink-400 mt-1 italic font-serif">
-                  Hellen's cakery paradise
-                </span>
-              </div>
+              <CakeElegancyLogo variant="inline" size="md" interactive={true} />
             </button>
 
             {/* Desktop Navigation */}
