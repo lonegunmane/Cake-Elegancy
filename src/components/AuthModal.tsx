@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { X, Lock, Mail, User as UserIcon, Phone, Sparkles, Check, ArrowRight } from 'lucide-react';
+import { X, Lock, Mail, User as UserIcon, Phone, ArrowRight } from 'lucide-react';
 
 export function AuthModal() {
   const {
@@ -48,28 +48,28 @@ export function AuthModal() {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-purple-950/60 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0 bg-purple-950/60 dark:bg-black/75 backdrop-blur-xs transition-opacity"
         onClick={closeAuthModal}
       />
 
-      <div className="relative bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 overflow-hidden shadow-2xl border border-pink-100 z-10 animate-in zoom-in-95 duration-200">
+      <div className="relative bg-white dark:bg-[#1E0B36] text-purple-950 dark:text-purple-100 rounded-3xl max-w-md w-full p-6 sm:p-8 overflow-hidden shadow-2xl border border-pink-100 dark:border-purple-800 z-10 animate-in zoom-in-95 duration-200">
         <button
           type="button"
           onClick={closeAuthModal}
-          className="absolute top-4 right-4 p-2 rounded-full text-purple-400 hover:text-purple-700 hover:bg-purple-50 transition-colors"
+          className="absolute top-4 right-4 p-2 rounded-full text-purple-400 hover:text-purple-700 dark:hover:text-white hover:bg-purple-50 dark:hover:bg-purple-900/50 transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Modal Header */}
         <div className="text-center space-y-2 mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-700 to-pink-500 text-white flex items-center justify-center mx-auto shadow-md">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-700 to-pink-500 flex items-center justify-center text-white mx-auto shadow-md">
             <Lock className="w-6 h-6" />
           </div>
-          <h3 className="font-serif text-2xl font-bold text-purple-950">
+          <h3 className="font-serif text-2xl font-bold text-purple-950 dark:text-white">
             {authModalMode === 'login' ? 'Welcome Back' : 'Create an Account'}
           </h3>
-          <p className="text-xs text-purple-800/70 max-w-xs mx-auto">
+          <p className="text-xs text-purple-800/70 dark:text-purple-300/80 max-w-xs mx-auto">
             {authModalMode === 'login'
               ? 'Log in to place your order with Cake Elegancy and receive your automatic 20% website discount.'
               : 'Sign up to complete your bakery order and enjoy 20% off all website purchases.'}
@@ -77,7 +77,7 @@ export function AuthModal() {
         </div>
 
         {/* Tab switch */}
-        <div className="flex bg-purple-50/80 p-1 rounded-2xl border border-purple-100 mb-5">
+        <div className="flex bg-purple-50/80 dark:bg-purple-950/60 p-1 rounded-2xl border border-purple-100 dark:border-purple-800 mb-5">
           <button
             type="button"
             onClick={() => {
@@ -86,8 +86,8 @@ export function AuthModal() {
             }}
             className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all ${
               authModalMode === 'login'
-                ? 'bg-purple-900 text-white shadow-xs'
-                : 'text-purple-700 hover:text-purple-950'
+                ? 'bg-purple-900 dark:bg-pink-600 text-white shadow-xs'
+                : 'text-purple-700 dark:text-purple-300 hover:text-purple-950'
             }`}
           >
             Log In
@@ -100,8 +100,8 @@ export function AuthModal() {
             }}
             className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all ${
               authModalMode === 'signup'
-                ? 'bg-purple-900 text-white shadow-xs'
-                : 'text-purple-700 hover:text-purple-950'
+                ? 'bg-purple-900 dark:bg-pink-600 text-white shadow-xs'
+                : 'text-purple-700 dark:text-purple-300 hover:text-purple-950'
             }`}
           >
             Create Account
@@ -109,7 +109,7 @@ export function AuthModal() {
         </div>
 
         {error && (
-          <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium">
+          <div className="mb-4 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs font-medium">
             {error}
           </div>
         )}
@@ -117,7 +117,7 @@ export function AuthModal() {
         <form onSubmit={handleSubmit} className="space-y-3.5">
           {authModalMode === 'signup' && (
             <div>
-              <label className="block text-xs font-bold text-purple-950 mb-1">
+              <label className="block text-xs font-bold text-purple-950 dark:text-purple-200 mb-1">
                 Your Full Name:
               </label>
               <div className="relative">
@@ -128,14 +128,14 @@ export function AuthModal() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Chola Mwansa"
-                  className="w-full bg-purple-50/50 border border-purple-200 rounded-2xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-purple-950 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full bg-purple-50/50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-700 rounded-2xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-purple-950 dark:text-white placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
                 />
               </div>
             </div>
           )}
 
           <div>
-            <label className="block text-xs font-bold text-purple-950 mb-1">
+            <label className="block text-xs font-bold text-purple-950 dark:text-purple-200 mb-1">
               Email Address:
             </label>
             <div className="relative">
@@ -146,14 +146,14 @@ export function AuthModal() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your.email@example.com"
-                className="w-full bg-purple-50/50 border border-purple-200 rounded-2xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-purple-950 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                className="w-full bg-purple-50/50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-700 rounded-2xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-purple-950 dark:text-white placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
               />
             </div>
           </div>
 
           {authModalMode === 'signup' && (
             <div>
-              <label className="block text-xs font-bold text-purple-950 mb-1">
+              <label className="block text-xs font-bold text-purple-950 dark:text-purple-200 mb-1">
                 WhatsApp / Phone Number:
               </label>
               <div className="relative">
@@ -163,14 +163,14 @@ export function AuthModal() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+260 971 603 384"
-                  className="w-full bg-purple-50/50 border border-purple-200 rounded-2xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-purple-950 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full bg-purple-50/50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-700 rounded-2xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-purple-950 dark:text-white placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
                 />
               </div>
             </div>
           )}
 
           <div>
-            <label className="block text-xs font-bold text-purple-950 mb-1">
+            <label className="block text-xs font-bold text-purple-950 dark:text-purple-200 mb-1">
               Password:
             </label>
             <div className="relative">
@@ -181,7 +181,7 @@ export function AuthModal() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-purple-50/50 border border-purple-200 rounded-2xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-purple-950 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                className="w-full bg-purple-50/50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-700 rounded-2xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-purple-950 dark:text-white placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
               />
             </div>
           </div>
@@ -196,24 +196,24 @@ export function AuthModal() {
         </form>
 
         {/* Demo Fast Login shortcuts */}
-        <div className="mt-5 pt-4 border-t border-purple-100 text-center">
-          <p className="text-[11px] text-purple-400 font-medium mb-2">
+        <div className="mt-5 pt-4 border-t border-purple-100 dark:border-purple-800/60 text-center">
+          <p className="text-[11px] text-purple-400 dark:text-purple-400/80 font-medium mb-2">
             Quick demo login (1-click):
           </p>
           <div className="flex gap-2 justify-center">
             <button
               type="button"
               onClick={() => handleQuickDemoLogin('customer@example.com')}
-              className="bg-purple-100/70 hover:bg-pink-100 text-purple-900 text-xs px-3 py-1.5 rounded-xl font-medium transition-colors"
+              className="bg-purple-100/70 dark:bg-purple-900/60 hover:bg-pink-100 dark:hover:bg-purple-800 text-purple-900 dark:text-purple-200 text-xs px-3 py-1.5 rounded-xl font-medium transition-colors"
             >
               Demo Customer
             </button>
             <button
               type="button"
               onClick={() => handleQuickDemoLogin('hellen@cakeelegancy.com')}
-              className="bg-purple-100/70 hover:bg-pink-100 text-purple-900 text-xs px-3 py-1.5 rounded-xl font-medium transition-colors"
+              className="bg-purple-100/70 dark:bg-purple-900/60 hover:bg-pink-100 dark:hover:bg-purple-800 text-purple-900 dark:text-purple-200 text-xs px-3 py-1.5 rounded-xl font-medium transition-colors"
             >
-              Hellen (Bakery Admin)
+              Hellen (Admin)
             </button>
           </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Product, formatZMW, getMinQuantity } from '../types/bakery';
 import { useCart } from '../context/CartContext';
 import { useRouter } from '../context/RouterContext';
+import { BakeryImage } from './BakeryImage';
 import { X, Star, Plus, Minus, ShoppingBag, Sparkles, Check, ArrowRight, AlertCircle } from 'lucide-react';
 
 interface QuickViewModalProps {
@@ -80,25 +81,26 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-purple-950/60 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0 bg-purple-950/60 dark:bg-black/75 backdrop-blur-xs transition-opacity"
         onClick={onClose}
       />
 
-      <div className="relative bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-pink-100 z-10 animate-in zoom-in-95 duration-200">
+      <div className="relative bg-white dark:bg-[#1E0B36] text-purple-950 dark:text-purple-100 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-pink-100 dark:border-purple-800/80 z-10 animate-in zoom-in-95 duration-200">
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/80 hover:bg-white text-purple-900 hover:text-pink-600 shadow-sm transition-colors"
+          className="absolute top-4 right-4 z-20 p-2 rounded-full bg-white/80 dark:bg-purple-900/80 hover:bg-white dark:hover:bg-purple-800 text-purple-900 dark:text-white hover:text-pink-600 shadow-sm transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
 
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Product Image */}
-          <div className="relative aspect-square md:aspect-auto bg-purple-50">
-            <img
+          <div className="relative aspect-square md:aspect-auto bg-purple-50 dark:bg-purple-950/40">
+            <BakeryImage
               src={product.imageUrl}
               alt={product.name}
+              category={product.category}
               className="w-full h-full object-cover"
             />
             {product.dietaryTags.length > 0 && (
@@ -106,7 +108,7 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
                 {product.dietaryTags.slice(0, 2).map(tag => (
                   <span
                     key={tag}
-                    className="bg-white/95 text-purple-900 text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs"
+                    className="bg-white/95 dark:bg-purple-900/90 text-purple-900 dark:text-purple-100 text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs border border-transparent dark:border-purple-700"
                   >
                     {tag}
                   </span>
@@ -114,7 +116,7 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
               </div>
             )}
             {minQty > 1 && (
-              <div className="absolute bottom-4 left-4 bg-purple-900 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+              <div className="absolute bottom-4 left-4 bg-purple-900 dark:bg-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
                 Minimum Order: {minQty} pieces
               </div>
             )}
@@ -124,10 +126,10 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
           <div className="p-6 flex flex-col justify-between max-h-[85vh] overflow-y-auto">
             <div className="space-y-4">
               <div>
-                <span className="text-xs font-bold text-pink-600 uppercase tracking-widest">
+                <span className="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-widest">
                   {product.category}
                 </span>
-                <h3 className="font-serif text-xl font-bold text-purple-950 mt-1">
+                <h3 className="font-serif text-xl font-bold text-purple-950 dark:text-white mt-1">
                   {product.name}
                 </h3>
                 <div className="flex items-center gap-2 mt-1 text-xs">
@@ -135,21 +137,21 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
                     <Star className="w-3.5 h-3.5 fill-amber-400" />
                     <span>{product.rating.toFixed(1)}</span>
                   </div>
-                  <span className="text-purple-300">•</span>
-                  <span className="text-purple-500">{product.reviewsCount} reviews</span>
+                  <span className="text-purple-300 dark:text-purple-600">•</span>
+                  <span className="text-purple-500 dark:text-purple-400">{product.reviewsCount} reviews</span>
                 </div>
               </div>
 
-              <p className="text-xs text-purple-900/70 leading-relaxed">
+              <p className="text-xs text-purple-900/70 dark:text-purple-300/70 leading-relaxed">
                 {product.shortDescription}
               </p>
 
               {/* Price in ZMW */}
               <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-bold text-purple-950 font-serif">
+                <span className="text-2xl font-bold text-purple-950 dark:text-white font-serif">
                   {formatZMW(calculatedUnitPrice)}
                 </span>
-                <span className="text-xs text-purple-500">
+                <span className="text-xs text-purple-500 dark:text-purple-400">
                   {product.category === 'cakes' ? 'base price' : 'per piece'}
                 </span>
                 {product.originalPrice && (
@@ -162,7 +164,7 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
               {/* Size Options (Cakes) */}
               {product.sizeOptions && product.sizeOptions.length > 0 && (
                 <div>
-                  <label className="block text-xs font-bold text-purple-950 mb-1.5">
+                  <label className="block text-xs font-bold text-purple-950 dark:text-purple-200 mb-1.5">
                     Select Cake Size:
                   </label>
                   <div className="space-y-1.5">
@@ -173,19 +175,19 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
                         onClick={() => setSelectedSizeId(opt.id)}
                         className={`w-full text-left p-2.5 rounded-xl border text-xs flex items-center justify-between transition-all ${
                           selectedSizeId === opt.id
-                            ? 'border-purple-800 bg-purple-50/80 text-purple-950 font-semibold'
-                            : 'border-purple-100 hover:border-purple-300 text-purple-800'
+                            ? 'border-purple-800 dark:border-pink-500 bg-purple-50/80 dark:bg-purple-900/60 text-purple-950 dark:text-white font-semibold'
+                            : 'border-purple-100 dark:border-purple-800 text-purple-800 dark:text-purple-300 hover:border-purple-300'
                         }`}
                       >
                         <div>
                           <span>{opt.name}</span>
                           {opt.serves && (
-                            <span className="text-[10px] text-purple-500 ml-1.5 font-normal">
+                            <span className="text-[10px] text-purple-500 dark:text-purple-400 ml-1.5 font-normal">
                               ({opt.serves})
                             </span>
                           )}
                         </div>
-                        <span className="font-bold text-pink-600">
+                        <span className="font-bold text-pink-600 dark:text-pink-400">
                           {opt.priceDelta > 0 ? `+${formatZMW(opt.priceDelta)}` : 'Standard'}
                         </span>
                       </button>
@@ -197,7 +199,7 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
               {/* Flavor Options */}
               {product.flavorOptions && product.flavorOptions.length > 0 && (
                 <div>
-                  <label className="block text-xs font-bold text-purple-950 mb-1.5">
+                  <label className="block text-xs font-bold text-purple-950 dark:text-purple-200 mb-1.5">
                     Flavor Profile:
                   </label>
                   <div className="grid grid-cols-1 gap-1.5">
@@ -208,13 +210,13 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
                         onClick={() => setSelectedFlavorId(flav.id)}
                         className={`text-left p-2 rounded-xl border text-xs transition-all ${
                           selectedFlavorId === flav.id
-                            ? 'border-pink-500 bg-pink-50/80 text-purple-950 font-semibold'
-                            : 'border-purple-100 hover:border-pink-200 text-purple-800'
+                            ? 'border-pink-500 bg-pink-50/80 dark:bg-pink-950/60 text-purple-950 dark:text-white font-semibold'
+                            : 'border-purple-100 dark:border-purple-800 text-purple-800 dark:text-purple-300 hover:border-pink-200'
                         }`}
                       >
                         <div>{flav.name}</div>
                         {flav.description && (
-                          <div className="text-[10px] text-purple-400 font-normal">
+                          <div className="text-[10px] text-purple-400 dark:text-purple-400/80 font-normal">
                             {flav.description}
                           </div>
                         )}
@@ -227,7 +229,7 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
               {/* Custom message for cakes */}
               {product.allowsCustomMessage && (
                 <div>
-                  <label className="block text-xs font-bold text-purple-950 mb-1">
+                  <label className="block text-xs font-bold text-purple-950 dark:text-purple-200 mb-1">
                     Custom Piping Inscription (Optional):
                   </label>
                   <input
@@ -236,7 +238,7 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
                     value={customMessage}
                     onChange={(e) => setCustomMessage(e.target.value)}
                     placeholder="e.g. Happy 30th Birthday Sarah! 🎉"
-                    className="w-full bg-purple-50/50 border border-purple-200 rounded-xl px-3 py-2 text-xs text-purple-950 placeholder-purple-400 focus:outline-none focus:ring-1 focus:ring-pink-500"
+                    className="w-full bg-purple-50/50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-700 rounded-xl px-3 py-2 text-xs text-purple-950 dark:text-white placeholder-purple-400 focus:outline-none focus:ring-1 focus:ring-pink-500"
                   />
                   <span className="text-[10px] text-purple-400 text-right block mt-0.5">
                     {35 - customMessage.length} characters left
@@ -246,7 +248,7 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
 
               {/* Minimum quantity alert */}
               {minWarning && (
-                <div className="p-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-[11px] flex items-center gap-1.5">
+                <div className="p-2 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-200 text-[11px] flex items-center gap-1.5">
                   <AlertCircle className="w-3.5 h-3.5 text-amber-600 shrink-0" />
                   <span>Minimum order is {minQty} pieces.</span>
                 </div>
@@ -254,25 +256,25 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
             </div>
 
             {/* Actions */}
-            <div className="pt-6 mt-4 border-t border-purple-100 space-y-3">
+            <div className="pt-6 mt-4 border-t border-purple-100 dark:border-purple-800/60 space-y-3">
               <div className="flex items-center justify-between gap-4">
                 {/* Quantity */}
-                <div className="flex items-center border border-purple-200 rounded-2xl bg-purple-50/40 px-3 py-1.5">
+                <div className="flex items-center border border-purple-200 dark:border-purple-700 rounded-2xl bg-purple-50/40 dark:bg-purple-950/60 px-3 py-1.5">
                   <button
                     type="button"
                     onClick={handleDecrement}
-                    className="text-purple-600 hover:text-pink-600 p-1"
+                    className="text-purple-600 dark:text-purple-300 hover:text-pink-600 p-1"
                     title={quantity <= minQty ? `Minimum is ${minQty}` : 'Decrease'}
                   >
                     <Minus className="w-3.5 h-3.5" />
                   </button>
-                  <span className="text-sm font-bold text-purple-950 px-3 min-w-8 text-center">
+                  <span className="text-sm font-bold text-purple-950 dark:text-white px-3 min-w-8 text-center">
                     {quantity}
                   </span>
                   <button
                     type="button"
                     onClick={handleIncrement}
-                    className="text-purple-600 hover:text-pink-600 p-1"
+                    className="text-purple-600 dark:text-purple-300 hover:text-pink-600 p-1"
                   >
                     <Plus className="w-3.5 h-3.5" />
                   </button>
@@ -307,7 +309,7 @@ export function QuickViewModal({ product, onClose }: QuickViewModalProps) {
               <button
                 type="button"
                 onClick={handleFullDetailView}
-                className="w-full text-center text-xs font-semibold text-purple-600 hover:text-pink-600 py-1 transition-colors flex items-center justify-center gap-1"
+                className="w-full text-center text-xs font-semibold text-purple-600 dark:text-pink-400 hover:text-pink-600 py-1 transition-colors flex items-center justify-center gap-1"
               >
                 <span>View Full Product Details & Options</span>
                 <ArrowRight className="w-3.5 h-3.5" />

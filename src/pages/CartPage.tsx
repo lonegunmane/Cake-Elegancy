@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { Link, useRouter } from '../context/RouterContext';
-import { formatZMW, getMinQuantity, DeliveryProvider } from '../types/bakery';
+import { formatZMW, getMinQuantity } from '../types/bakery';
+import { BakeryImage } from '../components/BakeryImage';
 import {
   ShoppingBag,
   Trash2,
@@ -17,7 +18,6 @@ import {
   Gift,
   Lock,
   User as UserIcon,
-  Phone,
   AlertCircle,
   MapPin
 } from 'lucide-react';
@@ -35,7 +35,6 @@ export function CartPage({ onCheckout }: CartPageProps) {
     clearCart,
     subtotal,
     websiteDiscount,
-    websiteDiscountPercent,
     total,
     deliveryProvider,
     setDeliveryProvider,
@@ -69,21 +68,21 @@ export function CartPage({ onCheckout }: CartPageProps) {
   if (items.length === 0) {
     return (
       <div className="max-w-xl mx-auto py-20 px-4 text-center space-y-6">
-        <div className="w-24 h-24 rounded-full bg-pink-50 border border-pink-100 flex items-center justify-center mx-auto text-pink-500 shadow-inner">
+        <div className="w-24 h-24 rounded-full bg-pink-50 dark:bg-pink-950/40 border border-pink-100 dark:border-purple-800 flex items-center justify-center mx-auto text-pink-500 shadow-inner">
           <ShoppingBag className="w-12 h-12" />
         </div>
         <div className="space-y-2">
-          <h1 className="font-serif text-3xl font-bold text-purple-950">
+          <h1 className="font-serif text-3xl font-bold text-purple-950 dark:text-white">
             Your Order Basket is Empty
           </h1>
-          <p className="text-purple-800/70 text-sm max-w-sm mx-auto leading-relaxed">
+          <p className="text-purple-800/70 dark:text-purple-300/70 text-sm max-w-sm mx-auto leading-relaxed">
             Welcome to Hellen's cakery paradise! Select from custom celebration cakes, golden scones, warm muffins, or gourmet cupcakes.
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-3 pt-2">
           <Link
             href="/cakes"
-            className="px-6 py-3 rounded-full bg-purple-900 hover:bg-purple-950 text-white font-bold text-xs shadow-md transition-all"
+            className="px-6 py-3 rounded-full bg-purple-900 dark:bg-pink-600 hover:bg-purple-950 text-white font-bold text-xs shadow-md transition-all"
           >
             Explore Cakes
           </Link>
@@ -95,7 +94,7 @@ export function CartPage({ onCheckout }: CartPageProps) {
           </Link>
           <Link
             href="/products"
-            className="px-6 py-3 rounded-full bg-white border border-purple-200 text-purple-900 font-bold text-xs hover:bg-purple-50 transition-all"
+            className="px-6 py-3 rounded-full bg-white dark:bg-purple-900/60 border border-purple-200 dark:border-purple-700 text-purple-900 dark:text-white font-bold text-xs hover:bg-purple-50 transition-all"
           >
             View All Treats
           </Link>
@@ -107,19 +106,19 @@ export function CartPage({ onCheckout }: CartPageProps) {
   return (
     <div className="space-y-8 pb-20">
       {/* Title */}
-      <div className="flex items-center justify-between pb-4 border-b border-purple-100">
+      <div className="flex items-center justify-between pb-4 border-b border-purple-100 dark:border-purple-800/60">
         <div>
-          <span className="text-xs font-bold text-pink-600 uppercase tracking-widest">
+          <span className="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-widest">
             Order-Only Review
           </span>
-          <h1 className="font-serif text-3xl sm:text-4xl font-extrabold text-purple-950 mt-0.5">
+          <h1 className="font-serif text-3xl sm:text-4xl font-extrabold text-purple-950 dark:text-white mt-0.5">
             Your Bakery Basket ({items.reduce((s, i) => s + i.quantity, 0)} pieces)
           </h1>
         </div>
         <button
           type="button"
           onClick={clearCart}
-          className="text-xs font-medium text-purple-500 hover:text-pink-600 underline"
+          className="text-xs font-medium text-purple-500 dark:text-purple-400 hover:text-pink-600 underline"
         >
           Clear Basket
         </button>
@@ -147,7 +146,7 @@ export function CartPage({ onCheckout }: CartPageProps) {
 
       {/* Minimum quantity alert if triggered */}
       {(localWarning || minQuantityNotice) && (
-        <div className="p-3 rounded-2xl bg-amber-50 border border-amber-200 text-amber-800 text-xs flex items-center gap-2">
+        <div className="p-3 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-200 text-xs flex items-center gap-2">
           <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
           <span>{localWarning || minQuantityNotice}</span>
         </div>
@@ -157,28 +156,31 @@ export function CartPage({ onCheckout }: CartPageProps) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Items List */}
         <div className="lg:col-span-7 space-y-4">
-          <div className="bg-white rounded-3xl border border-pink-100 shadow-xs divide-y divide-purple-50 overflow-hidden">
+          <div className="bg-white dark:bg-[#1E0B36] rounded-3xl border border-pink-100 dark:border-purple-800/60 shadow-xs divide-y divide-purple-50 dark:divide-purple-800/50 overflow-hidden">
             {items.map((item) => {
               const minQty = getMinQuantity(item.product.category);
               return (
                 <div key={item.id} className="p-4 sm:p-6 flex gap-4 sm:gap-6 items-center">
                   <Link href={`/product/${item.product.id}`} className="shrink-0">
-                    <img
-                      src={item.product.imageUrl}
-                      alt={item.product.name}
-                      className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover hover:scale-105 transition-transform"
-                    />
+                    <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden">
+                      <BakeryImage
+                        src={item.product.imageUrl}
+                        alt={item.product.name}
+                        category={item.product.category}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform"
+                      />
+                    </div>
                   </Link>
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <span className="text-[10px] uppercase font-bold text-pink-600 tracking-wider">
+                        <span className="text-[10px] uppercase font-bold text-pink-600 dark:text-pink-400 tracking-wider">
                           {item.product.category}
                         </span>
                         <Link
                           href={`/product/${item.product.id}`}
-                          className="font-serif text-base sm:text-lg font-bold text-purple-950 hover:text-pink-600 transition-colors block leading-snug"
+                          className="font-serif text-base sm:text-lg font-bold text-purple-950 dark:text-white hover:text-pink-600 dark:hover:text-pink-400 transition-colors block leading-snug"
                         >
                           {item.product.name}
                         </Link>
@@ -186,7 +188,7 @@ export function CartPage({ onCheckout }: CartPageProps) {
                       <button
                         type="button"
                         onClick={() => removeItem(item.id)}
-                        className="p-1.5 text-purple-400 hover:text-pink-600 transition-colors"
+                        className="p-1.5 text-purple-400 hover:text-pink-600 dark:hover:text-pink-400 transition-colors"
                         title="Remove"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -194,20 +196,20 @@ export function CartPage({ onCheckout }: CartPageProps) {
                     </div>
 
                     {/* Customization Details */}
-                    <div className="mt-1 text-xs text-purple-800/80 space-y-0.5">
+                    <div className="mt-1 text-xs text-purple-800/80 dark:text-purple-300/80 space-y-0.5">
                       {item.selectedSize && (
-                        <div>Size: <span className="font-semibold text-purple-950">{item.selectedSize}</span></div>
+                        <div>Size: <span className="font-semibold text-purple-950 dark:text-purple-100">{item.selectedSize}</span></div>
                       )}
                       {item.selectedFlavor && (
-                        <div>Flavor: <span className="font-semibold text-purple-950">{item.selectedFlavor}</span></div>
+                        <div>Flavor: <span className="font-semibold text-purple-950 dark:text-purple-100">{item.selectedFlavor}</span></div>
                       )}
                       {item.customMessage && (
-                        <div className="text-pink-700 italic bg-pink-50/80 px-2 py-0.5 rounded-lg inline-block mt-1">
+                        <div className="text-pink-700 dark:text-pink-300 italic bg-pink-50/80 dark:bg-pink-950/60 px-2 py-0.5 rounded-lg inline-block mt-1">
                           Piping note: "{item.customMessage}"
                         </div>
                       )}
                       {minQty > 1 && (
-                        <div className="text-[10px] text-purple-500">
+                        <div className="text-[10px] text-purple-500 dark:text-purple-400">
                           (Min. order rule: {minQty} pieces)
                         </div>
                       )}
@@ -215,33 +217,33 @@ export function CartPage({ onCheckout }: CartPageProps) {
 
                     {/* Quantity & Unit Price */}
                     <div className="mt-3 flex items-center justify-between">
-                      <div className="flex items-center border border-purple-200 rounded-full bg-purple-50/40 px-2 py-1">
+                      <div className="flex items-center border border-purple-200 dark:border-purple-700 rounded-full bg-purple-50/40 dark:bg-purple-950/60 px-2 py-1">
                         <button
                           type="button"
                           onClick={() => handleDecrement(item.id, item.quantity, item.product.category)}
-                          className="text-purple-600 hover:text-pink-600 p-1"
+                          className="text-purple-600 dark:text-purple-300 hover:text-pink-600 p-1"
                           title={item.quantity <= minQty ? `Minimum order is ${minQty}` : 'Decrease'}
                         >
                           <Minus className="w-3.5 h-3.5" />
                         </button>
-                        <span className="text-xs font-bold text-purple-950 px-3 min-w-6 text-center">
+                        <span className="text-xs font-bold text-purple-950 dark:text-white px-3 min-w-6 text-center">
                           {item.quantity}
                         </span>
                         <button
                           type="button"
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="text-purple-600 hover:text-pink-600 p-1"
+                          className="text-purple-600 dark:text-purple-300 hover:text-pink-600 p-1"
                         >
                           <Plus className="w-3.5 h-3.5" />
                         </button>
                       </div>
 
                       <div className="text-right">
-                        <div className="text-sm sm:text-base font-bold text-purple-950 font-serif">
+                        <div className="text-sm sm:text-base font-bold text-purple-950 dark:text-white font-serif">
                           {formatZMW(item.unitPrice * item.quantity)}
                         </div>
                         {item.quantity > 1 && (
-                          <div className="text-[10px] text-purple-400">
+                          <div className="text-[10px] text-purple-400 dark:text-purple-400/80">
                             {formatZMW(item.unitPrice)} each
                           </div>
                         )}
@@ -254,8 +256,8 @@ export function CartPage({ onCheckout }: CartPageProps) {
           </div>
 
           {/* Special Instructions for Hellen */}
-          <div className="bg-white rounded-3xl p-5 border border-pink-100 shadow-xs space-y-2">
-            <label className="block text-xs font-bold text-purple-950 flex items-center gap-1.5">
+          <div className="bg-white dark:bg-[#1E0B36] rounded-3xl p-5 border border-pink-100 dark:border-purple-800/60 shadow-xs space-y-2">
+            <label className="block text-xs font-bold text-purple-950 dark:text-purple-200 flex items-center gap-1.5">
               <Gift className="w-4 h-4 text-pink-500" />
               Special Notes or Event Decoration Instructions:
             </label>
@@ -264,50 +266,50 @@ export function CartPage({ onCheckout }: CartPageProps) {
               value={orderNote}
               onChange={(e) => setOrderNote(e.target.value)}
               placeholder="e.g. Color theme (lilac & blush pink), delivery timing, recipient name..."
-              className="w-full bg-purple-50/40 border border-purple-200 rounded-2xl p-3 text-xs text-purple-950 placeholder-purple-400 focus:outline-none focus:ring-1 focus:ring-pink-500"
+              className="w-full bg-purple-50/40 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-700 rounded-2xl p-3 text-xs text-purple-950 dark:text-white placeholder-purple-400 focus:outline-none focus:ring-1 focus:ring-pink-500"
             />
           </div>
         </div>
 
         {/* Right Column: Order Summary & Account Checkout */}
         <div className="lg:col-span-5 space-y-5">
-          <div className="bg-white rounded-3xl p-6 sm:p-7 border border-pink-100 shadow-md space-y-5">
-            <h2 className="font-serif text-xl font-bold text-purple-950">
+          <div className="bg-white dark:bg-[#1E0B36] rounded-3xl p-6 sm:p-7 border border-pink-100 dark:border-purple-800/60 shadow-md space-y-5">
+            <h2 className="font-serif text-xl font-bold text-purple-950 dark:text-white">
               Order Summary
             </h2>
 
             {/* Account Status / Logged In Box */}
-            <div className="p-3.5 rounded-2xl bg-purple-50/70 border border-purple-100 text-xs space-y-1.5">
+            <div className="p-3.5 rounded-2xl bg-purple-50/70 dark:bg-purple-950/60 border border-purple-100 dark:border-purple-800 text-xs space-y-1.5">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-purple-950 flex items-center gap-1.5">
+                <span className="font-bold text-purple-950 dark:text-white flex items-center gap-1.5">
                   <UserIcon className="w-3.5 h-3.5 text-pink-600" />
                   Account Status:
                 </span>
                 {isLoggedIn ? (
-                  <span className="text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full font-bold text-[10px]">
+                  <span className="text-emerald-700 dark:text-emerald-300 bg-emerald-100/70 dark:bg-emerald-950/60 px-2 py-0.5 rounded-full font-bold text-[10px]">
                     Logged In
                   </span>
                 ) : (
-                  <span className="text-amber-800 bg-amber-100/70 px-2 py-0.5 rounded-full font-bold text-[10px]">
+                  <span className="text-amber-800 dark:text-amber-300 bg-amber-100/70 dark:bg-amber-950/60 px-2 py-0.5 rounded-full font-bold text-[10px]">
                     Login Required
                   </span>
                 )}
               </div>
 
               {isLoggedIn ? (
-                <div className="text-[11px] text-purple-800 pt-1">
-                  Ordering as <strong className="text-purple-950">{user?.name}</strong> ({user?.email})
-                  {user?.phone && <span className="block text-purple-600">Phone: {user.phone}</span>}
+                <div className="text-[11px] text-purple-800 dark:text-purple-200 pt-1">
+                  Ordering as <strong className="text-purple-950 dark:text-white">{user?.name}</strong> ({user?.email})
+                  {user?.phone && <span className="block text-purple-600 dark:text-pink-400">Phone: {user.phone}</span>}
                 </div>
               ) : (
                 <div className="pt-1">
-                  <p className="text-[11px] text-purple-700 mb-2">
+                  <p className="text-[11px] text-purple-700 dark:text-purple-300 mb-2">
                     To complete your purchase, you must be logged in. Create an account or sign in with 1 click.
                   </p>
                   <button
                     type="button"
                     onClick={() => openAuthModal('login')}
-                    className="w-full py-2 bg-purple-900 hover:bg-purple-950 text-white rounded-xl font-bold text-xs transition-colors"
+                    className="w-full py-2 bg-purple-900 dark:bg-pink-600 hover:bg-purple-950 dark:hover:bg-pink-700 text-white rounded-xl font-bold text-xs transition-colors"
                   >
                     Log In / Create Account
                   </button>
@@ -315,9 +317,9 @@ export function CartPage({ onCheckout }: CartPageProps) {
               )}
             </div>
 
-            {/* Delivery Service Selection (Yango Deli vs Platinum Carrier) */}
+            {/* Delivery Service Selection */}
             <div className="space-y-2">
-              <span className="text-xs font-bold text-purple-950 block flex items-center gap-1.5">
+              <span className="text-xs font-bold text-purple-950 dark:text-purple-200 block flex items-center gap-1.5">
                 <Truck className="w-3.5 h-3.5 text-pink-600" />
                 Select Delivery Carrier:
               </span>
@@ -327,17 +329,17 @@ export function CartPage({ onCheckout }: CartPageProps) {
                   onClick={() => setDeliveryProvider('yango')}
                   className={`p-3.5 rounded-2xl border text-xs text-left transition-all ${
                     deliveryProvider === 'yango'
-                      ? 'border-purple-800 bg-purple-50 text-purple-950 font-bold shadow-xs'
-                      : 'border-purple-200/80 text-purple-700 hover:border-purple-300'
+                      ? 'border-purple-800 dark:border-pink-500 bg-purple-50 dark:bg-purple-900/60 text-purple-950 dark:text-white font-bold shadow-xs'
+                      : 'border-purple-200/80 dark:border-purple-800 text-purple-700 dark:text-purple-300 hover:border-purple-300'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1">
                     <span className="font-bold text-sm">Yango Deli</span>
-                    <span className="text-[10px] bg-purple-200/60 text-purple-950 px-2 py-0.5 rounded-full font-semibold">
+                    <span className="text-[10px] bg-purple-200/60 dark:bg-purple-800/80 text-purple-950 dark:text-purple-200 px-2 py-0.5 rounded-full font-semibold">
                       Local Deliveries (Lusaka)
                     </span>
                   </div>
-                  <p className="text-[11px] text-purple-700/80 font-normal">
+                  <p className="text-[11px] text-purple-700/80 dark:text-purple-300/80 font-normal">
                     Direct on-demand delivery across Lusaka. Standard Yango Deli carrier charges apply upon dispatch.
                   </p>
                 </button>
@@ -347,17 +349,17 @@ export function CartPage({ onCheckout }: CartPageProps) {
                   onClick={() => setDeliveryProvider('platinum')}
                   className={`p-3.5 rounded-2xl border text-xs text-left transition-all ${
                     deliveryProvider === 'platinum'
-                      ? 'border-purple-800 bg-purple-50 text-purple-950 font-bold shadow-xs'
-                      : 'border-purple-200/80 text-purple-700 hover:border-purple-300'
+                      ? 'border-purple-800 dark:border-pink-500 bg-purple-50 dark:bg-purple-900/60 text-purple-950 dark:text-white font-bold shadow-xs'
+                      : 'border-purple-200/80 dark:border-purple-800 text-purple-700 dark:text-purple-300 hover:border-purple-300'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1">
                     <span className="font-bold text-sm">Platinum Carrier Services</span>
-                    <span className="text-[10px] bg-pink-200/60 text-pink-900 px-2 py-0.5 rounded-full font-semibold">
+                    <span className="text-[10px] bg-pink-200/60 dark:bg-pink-950 text-pink-900 dark:text-pink-300 px-2 py-0.5 rounded-full font-semibold">
                       Country-wide Zambia
                     </span>
                   </div>
-                  <p className="text-[11px] text-purple-700/80 font-normal">
+                  <p className="text-[11px] text-purple-700/80 dark:text-purple-300/80 font-normal">
                     Secure courier to Copperbelt, Livingstone, Ndola, and all provinces. Standard Platinum Carrier rates apply.
                   </p>
                 </button>
@@ -366,7 +368,7 @@ export function CartPage({ onCheckout }: CartPageProps) {
 
             {/* Destination Address Input */}
             <div className="space-y-1.5 text-xs">
-              <label className="font-bold text-purple-950 block flex items-center gap-1.5">
+              <label className="font-bold text-purple-950 dark:text-purple-200 block flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-pink-600" />
                 Delivery Address / Town:
               </label>
@@ -375,20 +377,20 @@ export function CartPage({ onCheckout }: CartPageProps) {
                 value={deliveryAddress}
                 onChange={(e) => setDeliveryAddress(e.target.value)}
                 placeholder="e.g. Woodlands, Lusaka or Kansenshi, Ndola"
-                className="w-full bg-purple-50/70 border border-purple-200 rounded-xl px-3 py-2 text-xs text-purple-950 focus:outline-none focus:ring-1 focus:ring-pink-500"
+                className="w-full bg-purple-50/70 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-700 rounded-xl px-3 py-2 text-xs text-purple-950 dark:text-white focus:outline-none focus:ring-1 focus:ring-pink-500"
               />
             </div>
 
             {/* Preferred Delivery Time Slot */}
             <div className="space-y-1.5 text-xs">
-              <label className="font-bold text-purple-950 block flex items-center gap-1.5">
+              <label className="font-bold text-purple-950 dark:text-purple-200 block flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5 text-pink-600" />
                 Preferred Delivery Slot:
               </label>
               <select
                 value={preferredDate}
                 onChange={(e) => setPreferredDate(e.target.value)}
-                className="w-full bg-purple-50/70 border border-purple-200 rounded-xl px-3 py-2 text-xs text-purple-950 font-medium focus:outline-none focus:ring-1 focus:ring-pink-500 cursor-pointer"
+                className="w-full bg-purple-50/70 dark:bg-purple-950/70 border border-purple-200 dark:border-purple-700 rounded-xl px-3 py-2 text-xs text-purple-950 dark:text-purple-100 font-medium focus:outline-none focus:ring-1 focus:ring-pink-500 cursor-pointer"
               >
                 <option value="Tomorrow Morning (09:00 - 12:00)">Tomorrow Morning (09:00 – 12:00)</option>
                 <option value="Tomorrow Afternoon (14:00 - 17:00)">Tomorrow Afternoon (14:00 – 17:00)</option>
@@ -398,32 +400,32 @@ export function CartPage({ onCheckout }: CartPageProps) {
             </div>
 
             {/* Price Breakdown */}
-            <div className="space-y-2.5 pt-3 border-t border-purple-100 text-xs">
-              <div className="flex justify-between text-purple-800">
+            <div className="space-y-2.5 pt-3 border-t border-purple-100 dark:border-purple-800/60 text-xs">
+              <div className="flex justify-between text-purple-800 dark:text-purple-300">
                 <span>Items Subtotal</span>
                 <span className="font-semibold">{formatZMW(subtotal)}</span>
               </div>
 
               {/* 20% Website Discount Row */}
-              <div className="flex justify-between text-emerald-700 font-bold bg-emerald-50/80 p-2 rounded-xl border border-emerald-200/80">
+              <div className="flex justify-between text-emerald-700 dark:text-emerald-400 font-bold bg-emerald-50/80 dark:bg-emerald-950/50 p-2 rounded-xl border border-emerald-200/80 dark:border-emerald-800">
                 <span className="flex items-center gap-1">
-                  <Percent className="w-3.5 h-3.5" />
+                  <Percent className="w-3 h-3" />
                   Website Order Discount (20%)
                 </span>
                 <span>-{formatZMW(websiteDiscount)}</span>
               </div>
 
-              <div className="flex justify-between text-purple-800">
+              <div className="flex justify-between text-purple-800 dark:text-purple-300">
                 <span>Delivery Carrier ({deliveryProvider === 'yango' ? 'Yango Deli' : 'Platinum Carrier'})</span>
-                <span className="font-medium text-purple-500 italic">
+                <span className="font-medium text-purple-500 dark:text-purple-400 italic">
                   Standard rates apply
                 </span>
               </div>
 
-              <div className="flex justify-between items-baseline pt-3 border-t border-purple-200 text-purple-950 font-bold">
+              <div className="flex justify-between items-baseline pt-3 border-t border-purple-200 dark:border-purple-800 text-purple-950 dark:text-white font-bold">
                 <span className="text-base">Discounted Order Total</span>
                 <div className="text-right">
-                  <span className="text-2xl font-serif text-pink-600">
+                  <span className="text-2xl font-serif text-pink-600 dark:text-pink-400">
                     {formatZMW(total)}
                   </span>
                   <div className="text-[10px] text-purple-400 font-normal">

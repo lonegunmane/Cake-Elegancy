@@ -7,9 +7,11 @@ import React, { useState } from 'react';
 import { RouterProvider, usePathname } from './context/RouterContext';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CartDrawer } from './components/CartDrawer';
+import { SideDashboard } from './components/SideDashboard';
 import { QuickViewModal } from './components/QuickViewModal';
 import { OrderSuccessModal } from './components/OrderSuccessModal';
 import { AuthModal } from './components/AuthModal';
@@ -24,6 +26,7 @@ function AppContent() {
   const pathname = usePathname();
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [isSideDashboardOpen, setIsSideDashboardOpen] = useState(false);
 
   // Extract query parameter if any
   let searchQuery = '';
@@ -85,14 +88,20 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF5FF] text-purple-950 relative">
-      {/* Sticky Top Navbar */}
-      <Navbar />
+    <div className="min-h-screen flex flex-col bg-[#FAF5FF] dark:bg-[#130822] text-purple-950 dark:text-purple-100 relative transition-colors duration-200">
+      {/* Sticky Top Navbar - Clicking logo opens Side Dashboard */}
+      <Navbar onOpenSideDashboard={() => setIsSideDashboardOpen(true)} />
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         {renderCurrentPage()}
       </main>
+
+      {/* Side Dashboard (Opened solely when clicking the Cake Elegancy logo) */}
+      <SideDashboard
+        isOpen={isSideDashboardOpen}
+        onClose={() => setIsSideDashboardOpen(false)}
+      />
 
       {/* Global Interactive Drawers & Modals */}
       <CartDrawer onCheckout={() => setIsSuccessModalOpen(true)} />
@@ -126,12 +135,14 @@ function AppContent() {
 
 export default function App() {
   return (
-    <RouterProvider>
-      <AuthProvider>
-        <CartProvider>
-          <AppContent />
-        </CartProvider>
-      </AuthProvider>
-    </RouterProvider>
+    <ThemeProvider>
+      <RouterProvider>
+        <AuthProvider>
+          <CartProvider>
+            <AppContent />
+          </CartProvider>
+        </AuthProvider>
+      </RouterProvider>
+    </ThemeProvider>
   );
 }

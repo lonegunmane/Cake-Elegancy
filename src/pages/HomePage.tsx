@@ -2,23 +2,20 @@ import React, { useState } from 'react';
 import { Link, useRouter } from '../context/RouterContext';
 import { CATEGORIES, PRODUCTS } from '../data/products';
 import { ProductCard } from '../components/ProductCard';
+import { BakeryImage } from '../components/BakeryImage';
 import { Product, formatZMW } from '../types/bakery';
 import {
   Sparkles,
   ArrowRight,
   Heart,
-  Award,
-  Clock,
-  ShieldCheck,
-  Star,
   Cake,
   ChevronRight,
   Phone,
   MessageCircle,
   Truck,
   Percent,
-  CheckCircle2,
-  Package
+  Package,
+  Star
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -36,43 +33,43 @@ export function HomePage({ onQuickView }: HomePageProps) {
   return (
     <div className="space-y-20 pb-16">
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-8 pb-16 sm:pb-24 lg:pt-14">
+      <section className="relative overflow-hidden pt-6 pb-14 sm:pb-20 lg:pt-12">
         {/* Soft background ambient gradient blooms */}
-        <div className="absolute top-0 right-1/4 -z-10 w-96 h-96 bg-pink-200/50 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-20 left-10 -z-10 w-96 h-96 bg-purple-200/40 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-1/4 -z-10 w-96 h-96 bg-pink-200/50 dark:bg-pink-900/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-20 left-10 -z-10 w-96 h-96 bg-purple-200/40 dark:bg-purple-900/25 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             {/* Left Column: Copy & CTAs */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-100/80 border border-pink-200 text-pink-700 text-xs sm:text-sm font-semibold shadow-xs">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-100/90 dark:bg-pink-950/60 border border-pink-200 dark:border-pink-800/60 text-pink-700 dark:text-pink-300 text-xs sm:text-sm font-semibold shadow-xs">
                 <Sparkles className="w-4 h-4 text-pink-500 animate-spin" style={{ animationDuration: '8s' }} />
                 <span>Cake Elegancy • Hellen's cakery paradise</span>
               </div>
 
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-purple-950 tracking-tight leading-[1.12]">
+              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-purple-950 dark:text-white tracking-tight leading-[1.14]">
                 Elegance in every bite,{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-800 via-pink-600 to-purple-700">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-800 via-pink-600 to-purple-700 dark:from-purple-400 dark:via-pink-400 dark:to-purple-300">
                   baked fresh
                 </span>{' '}
                 to order.
               </h1>
 
-              <p className="text-base sm:text-lg text-purple-900/70 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+              <p className="text-base sm:text-lg text-purple-900/70 dark:text-purple-200/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
                 Welcome to Hellen's cakery paradise! We specialize in custom multi-tier celebration cakes, golden tea scones, warm breakfast muffins, and frosted cupcakes. <em>Order-only bakery</em> dispatched throughout Zambia.
               </p>
 
               {/* Automatic 20% Discount Callout */}
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-900 to-pink-600 text-white px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold shadow-md shadow-pink-500/15">
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-900 to-pink-600 dark:from-purple-800 dark:to-pink-600 text-white px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold shadow-md shadow-pink-500/15">
                 <Percent className="w-4 h-4 text-pink-200" />
                 <span>Order on our website and get 20% OFF automatically at checkout!</span>
               </div>
 
               {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
                 <Link
                   href="/cakes"
-                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-purple-800 to-pink-600 hover:from-purple-900 hover:to-pink-700 text-white font-bold text-sm shadow-lg shadow-purple-900/15 hover:shadow-xl hover:shadow-pink-500/25 active:scale-98 transition-all flex items-center justify-center gap-2 group"
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-purple-800 to-pink-600 hover:from-purple-900 hover:to-pink-700 text-white font-bold text-sm shadow-lg shadow-purple-900/15 hover:shadow-xl hover:shadow-pink-500/25 active:scale-98 transition-all flex items-center justify-center gap-2 group"
                 >
                   <Cake className="w-4 h-4" />
                   <span>Browse Custom Cakes</span>
@@ -83,38 +80,38 @@ export function HomePage({ onQuickView }: HomePageProps) {
                   href="https://wa.me/260971603384?text=Hello%20Hellen,%20I%20would%20like%20to%20order%20from%20Cake%20Elegancy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-7 py-4 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>Order via WhatsApp</span>
                 </a>
               </div>
 
-              {/* Trust Badges (No physical shop) */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-purple-100/80 text-left">
-                <div className="flex items-center gap-2 text-xs text-purple-900 font-medium">
-                  <div className="w-7 h-7 rounded-full bg-pink-100 text-pink-700 flex items-center justify-center shrink-0">
+              {/* Trust Badges */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-purple-100/80 dark:border-purple-800/60 text-left">
+                <div className="flex items-center gap-2 text-xs text-purple-900 dark:text-purple-200 font-medium">
+                  <div className="w-7 h-7 rounded-full bg-pink-100 dark:bg-pink-950/70 text-pink-700 dark:text-pink-300 flex items-center justify-center shrink-0">
                     <Heart className="w-3.5 h-3.5 fill-pink-500 text-pink-500" />
                   </div>
                   <span>100% Order-Only Fresh</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-purple-900 font-medium">
-                  <div className="w-7 h-7 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
+                <div className="flex items-center gap-2 text-xs text-purple-900 dark:text-purple-200 font-medium">
+                  <div className="w-7 h-7 rounded-full bg-purple-100 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 flex items-center justify-center shrink-0">
                     <Percent className="w-3.5 h-3.5" />
                   </div>
                   <span>20% Website Discount</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-purple-900 font-medium">
-                  <div className="w-7 h-7 rounded-full bg-pink-100 text-pink-700 flex items-center justify-center shrink-0">
+                <div className="flex items-center gap-2 text-xs text-purple-900 dark:text-purple-200 font-medium">
+                  <div className="w-7 h-7 rounded-full bg-pink-100 dark:bg-pink-950/70 text-pink-700 dark:text-pink-300 flex items-center justify-center shrink-0">
                     <Truck className="w-3.5 h-3.5" />
                   </div>
                   <span>Yango Deli (Local)</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-purple-900 font-medium">
-                  <div className="w-7 h-7 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
+                <div className="flex items-center gap-2 text-xs text-purple-900 dark:text-purple-200 font-medium">
+                  <div className="w-7 h-7 rounded-full bg-purple-100 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 flex items-center justify-center shrink-0">
                     <Package className="w-3.5 h-3.5" />
                   </div>
-                  <span>Platinum Carrier (Country-wide)</span>
+                  <span>Platinum Carrier</span>
                 </div>
               </div>
             </div>
@@ -123,17 +120,18 @@ export function HomePage({ onQuickView }: HomePageProps) {
             <div className="lg:col-span-5 relative">
               <div className="relative mx-auto max-w-md lg:max-w-none">
                 {/* Main Card */}
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white group">
-                  <img
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-purple-800 bg-white dark:bg-[#1E0B36] group">
+                  <BakeryImage
                     src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=1000&q=80"
                     alt="Velvet Lavender Berry Cake"
-                    className="w-full h-96 sm:h-[460px] object-cover group-hover:scale-105 transition-transform duration-700"
+                    category="cakes"
+                    className="w-full h-80 sm:h-[420px] object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-purple-950/85 via-purple-950/30 to-transparent flex flex-col justify-end p-6 text-white">
+                  <div className="absolute inset-0 bg-gradient-to-t from-purple-950/90 via-purple-950/35 to-transparent flex flex-col justify-end p-6 text-white">
                     <span className="bg-pink-500 text-white text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full w-max mb-2">
                       Hellen's Signature
                     </span>
-                    <h3 className="font-serif text-2xl font-bold">
+                    <h3 className="font-serif text-2xl font-bold leading-snug">
                       Velvet Lavender Berry Cake
                     </h3>
                     <p className="text-purple-200 text-xs mt-1">
@@ -153,24 +151,24 @@ export function HomePage({ onQuickView }: HomePageProps) {
                 </div>
 
                 {/* Floating Discount Tag */}
-                <div className="absolute -top-4 -left-4 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-pink-100 hidden sm:flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center font-serif font-bold text-lg">
+                <div className="absolute -top-4 -left-4 bg-white/95 dark:bg-[#250E40]/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-pink-100 dark:border-purple-800 hidden sm:flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-pink-100 dark:bg-pink-950 text-pink-600 dark:text-pink-400 flex items-center justify-center font-serif font-bold text-lg">
                     %
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-purple-950">20% Off Online</div>
-                    <div className="text-[11px] text-pink-600 font-semibold">Automatic at checkout</div>
+                    <div className="text-xs font-bold text-purple-950 dark:text-white">20% Off Online</div>
+                    <div className="text-[11px] text-pink-600 dark:text-pink-400 font-semibold">Automatic at checkout</div>
                   </div>
                 </div>
 
                 {/* Floating Order-Only Badge */}
-                <div className="absolute -bottom-6 -right-4 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-purple-100 hidden sm:flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-base">
+                <div className="absolute -bottom-5 -right-4 bg-white/95 dark:bg-[#250E40]/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-purple-100 dark:border-purple-800 hidden sm:flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300 flex items-center justify-center font-bold text-base">
                     🧁
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-purple-950">Order-Only Bakery</div>
-                    <div className="text-[11px] text-purple-500">Baked fresh for your event</div>
+                    <div className="text-xs font-bold text-purple-950 dark:text-white">Order-Only Bakery</div>
+                    <div className="text-[11px] text-purple-500 dark:text-purple-400">Baked fresh for your event</div>
                   </div>
                 </div>
               </div>
@@ -182,13 +180,13 @@ export function HomePage({ onQuickView }: HomePageProps) {
       {/* Featured 4 Categories Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <span className="text-xs font-bold text-pink-600 uppercase tracking-widest">
+          <span className="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-widest">
             Hellen's Collections
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-purple-950">
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-purple-950 dark:text-white">
             Explore By Category
           </h2>
-          <p className="text-purple-900/60 text-sm">
+          <p className="text-purple-900/60 dark:text-purple-300/70 text-sm">
             Everything is baked strictly on an order basis: single celebration cakes, or minimum 6 pieces for scones, muffins, and cupcakes.
           </p>
         </div>
@@ -198,16 +196,17 @@ export function HomePage({ onQuickView }: HomePageProps) {
             <Link
               key={cat.id}
               href={cat.path}
-              className="group relative rounded-3xl overflow-hidden bg-white border border-pink-100 shadow-xs hover:shadow-xl hover:shadow-purple-900/10 transition-all duration-300 flex flex-col hover:-translate-y-1.5"
+              className="group relative rounded-3xl overflow-hidden bg-white dark:bg-[#1E0B36] border border-pink-100 dark:border-purple-800/60 shadow-xs hover:shadow-xl hover:shadow-purple-900/10 dark:hover:shadow-pink-900/10 transition-all duration-300 flex flex-col hover:-translate-y-1.5"
             >
               {/* Category Image */}
-              <div className="relative aspect-4/3 w-full overflow-hidden bg-purple-50">
-                <img
+              <div className="relative aspect-4/3 w-full overflow-hidden bg-purple-50 dark:bg-purple-950/40">
+                <BakeryImage
                   src={cat.heroImage}
                   alt={cat.name}
+                  category={cat.id}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-950/70 via-purple-950/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-purple-950/20 to-transparent" />
                 <div className="absolute bottom-3 left-4 right-4 text-white">
                   <span className="text-[11px] font-semibold text-pink-300 uppercase tracking-wider">
                     {cat.id === 'cakes' ? 'Min. 1 cake' : 'Min. 6 pieces'}
@@ -220,14 +219,14 @@ export function HomePage({ onQuickView }: HomePageProps) {
 
               {/* Category Body */}
               <div className="p-5 flex-1 flex flex-col justify-between">
-                <p className="text-xs text-purple-900/70 leading-relaxed line-clamp-2">
+                <p className="text-xs text-purple-900/70 dark:text-purple-300/70 leading-relaxed line-clamp-2">
                   {cat.description}
                 </p>
 
-                <div className="pt-4 mt-3 border-t border-purple-50 flex items-center justify-between text-xs font-bold text-purple-900 group-hover:text-pink-600 transition-colors">
+                <div className="pt-4 mt-3 border-t border-purple-50 dark:border-purple-800/50 flex items-center justify-between text-xs font-bold text-purple-900 dark:text-purple-200 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">
                   <span>View {cat.name}</span>
-                  <div className="w-7 h-7 rounded-full bg-purple-50 group-hover:bg-pink-100 flex items-center justify-center transition-colors">
-                    <ChevronRight className="w-4 h-4 text-purple-700 group-hover:text-pink-600" />
+                  <div className="w-7 h-7 rounded-full bg-purple-50 dark:bg-purple-900/50 group-hover:bg-pink-100 dark:group-hover:bg-purple-800 flex items-center justify-center transition-colors">
+                    <ChevronRight className="w-4 h-4 text-purple-700 dark:text-pink-400 group-hover:text-pink-600" />
                   </div>
                 </div>
               </div>
@@ -240,19 +239,19 @@ export function HomePage({ onQuickView }: HomePageProps) {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
           <div>
-            <span className="text-xs font-bold text-pink-600 uppercase tracking-widest">
+            <span className="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-widest">
               From Hellen's Oven
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-purple-950 mt-1">
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-purple-950 dark:text-white mt-1">
               Featured Bakery Creations
             </h2>
-            <p className="text-purple-900/60 text-sm mt-1">
+            <p className="text-purple-900/60 dark:text-purple-300/70 text-sm mt-1">
               Popular celebration favorites (prices in Zambian Kwacha ZMW).
             </p>
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap gap-1.5 bg-purple-100/60 p-1.5 rounded-full border border-purple-200/60">
+          <div className="flex flex-wrap gap-1.5 bg-purple-100/60 dark:bg-purple-950/60 p-1.5 rounded-full border border-purple-200/60 dark:border-purple-800">
             {['all', 'cakes', 'scones', 'muffins', 'cupcakes'].map((cat) => (
               <button
                 key={cat}
@@ -260,8 +259,8 @@ export function HomePage({ onQuickView }: HomePageProps) {
                 onClick={() => setActiveCategoryFilter(cat)}
                 className={`px-4 py-1.5 rounded-full text-xs font-semibold capitalize transition-all ${
                   activeCategoryFilter === cat
-                    ? 'bg-purple-900 text-white shadow-xs'
-                    : 'text-purple-800 hover:text-pink-600 hover:bg-white/60'
+                    ? 'bg-purple-900 dark:bg-pink-600 text-white shadow-xs'
+                    : 'text-purple-800 dark:text-purple-200 hover:text-pink-600 dark:hover:text-pink-300 hover:bg-white/60 dark:hover:bg-purple-900/40'
                 }`}
               >
                 {cat === 'all' ? 'All Treats' : cat}
@@ -284,7 +283,7 @@ export function HomePage({ onQuickView }: HomePageProps) {
         <div className="mt-12 text-center">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-purple-900 hover:bg-purple-950 text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-purple-900 dark:bg-pink-600 hover:bg-purple-950 dark:hover:bg-pink-700 text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all"
           >
             <span>View All Baked Treats</span>
             <ArrowRight className="w-4 h-4" />
@@ -292,7 +291,7 @@ export function HomePage({ onQuickView }: HomePageProps) {
         </div>
       </section>
 
-      {/* Contact Us & Order via WhatsApp Section (Required on Homepage) */}
+      {/* Contact Us & Order via WhatsApp Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-3xl bg-gradient-to-br from-purple-950 via-purple-900 to-pink-950 text-white p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-xl border border-purple-800">
           <div className="absolute top-0 right-0 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -379,10 +378,10 @@ export function HomePage({ onQuickView }: HomePageProps) {
       {/* Customer Love & Reviews */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <span className="text-xs font-bold text-pink-600 uppercase tracking-widest">
+          <span className="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-widest">
             Loved Across Zambia
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-purple-950">
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-purple-950 dark:text-white">
             What Our Clients Say
           </h2>
         </div>
@@ -413,7 +412,7 @@ export function HomePage({ onQuickView }: HomePageProps) {
           ].map((review, i) => (
             <div
               key={i}
-              className="bg-white p-6 rounded-3xl border border-pink-100 shadow-xs flex flex-col justify-between"
+              className="bg-white dark:bg-[#1E0B36] p-6 rounded-3xl border border-pink-100 dark:border-purple-800/60 shadow-xs flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="flex gap-1 text-amber-400">
@@ -421,17 +420,17 @@ export function HomePage({ onQuickView }: HomePageProps) {
                     <Star key={s} className="w-4 h-4 fill-amber-400" />
                   ))}
                 </div>
-                <p className="text-xs text-purple-900/80 leading-relaxed italic">
+                <p className="text-xs text-purple-900/80 dark:text-purple-200/80 leading-relaxed italic">
                   "{review.quote}"
                 </p>
               </div>
 
-              <div className="pt-4 mt-4 border-t border-purple-50 flex items-center justify-between">
+              <div className="pt-4 mt-4 border-t border-purple-50 dark:border-purple-800/50 flex items-center justify-between">
                 <div>
-                  <div className="text-xs font-bold text-purple-950">{review.name}</div>
-                  <div className="text-[10px] text-purple-400">{review.role}</div>
+                  <div className="text-xs font-bold text-purple-950 dark:text-white">{review.name}</div>
+                  <div className="text-[10px] text-purple-400 dark:text-purple-400/80">{review.role}</div>
                 </div>
-                <span className="text-[10px] font-semibold text-pink-600 bg-pink-50 px-2.5 py-1 rounded-full">
+                <span className="text-[10px] font-semibold text-pink-600 dark:text-pink-300 bg-pink-50 dark:bg-pink-950/60 px-2.5 py-1 rounded-full">
                   {review.treat}
                 </span>
               </div>

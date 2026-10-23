@@ -15,7 +15,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-gradient-to-b from-purple-950 via-purple-900 to-[#2A0845] text-purple-100 pt-16 pb-12 mt-20 border-t border-purple-800">
+    <footer className="bg-gradient-to-b from-purple-950 via-purple-900 to-[#2A0845] dark:from-[#110520] dark:via-[#160728] dark:to-[#0C0317] text-purple-100 pt-16 pb-12 mt-20 border-t border-purple-800 dark:border-purple-800/60 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-12 border-b border-purple-800/60">
