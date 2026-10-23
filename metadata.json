@@ -1,0 +1,6 @@
+{
+  "name": "SweetBite Bakery",
+  "description": "Artisanal bakery e-commerce offering handcrafted cakes, golden scones, fresh muffins, and delicate cupcakes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
